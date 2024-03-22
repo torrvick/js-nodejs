@@ -11,4 +11,4 @@ console.log(csvReader('path_to_csv.csv'));
 Example:
 
 
-![example](./assets/example.png)
+![example](https://github.com/torrvick/js-nodejs/blob/main/sem02/csvRead/assets/example.png?raw=true)
