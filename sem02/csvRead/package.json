@@ -1,0 +1,16 @@
+{
+  "name": "csvread",
+  "version": "1.0.0",
+  "description": "",
+  "main": "csvread.js",
+  "scripts": {
+    "test": "node test.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "as-table": "^1.0.55",
+    "colors": "^1.4.0"
+  }
+}
