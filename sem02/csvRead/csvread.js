@@ -20,7 +20,6 @@ function readCSV(filename) {
 		throw new Error('Файл не найден');
 	}
 	const arr = data.split('\n');
-	console.log('sdfsdf');
 	const tableData = arr.map((element) => {
 		const record = element.split(';');
 		let resObject = [];
