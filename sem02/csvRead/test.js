@@ -1,2 +1,2 @@
-const csvReader = require('./csvread');
+const csvReader = require('csvread');
 console.log(csvReader('./laptops.csv'));

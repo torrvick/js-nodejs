@@ -1,13 +1,12 @@
 {
-  "name": "csvread",
-  "version": "1.0.0",
-  "description": "",
+  "name": "csv-colorize-table",
+  "version": "1.0.3",
+  "description": "Library for CSV-files colorize output",
   "main": "csvread.js",
   "scripts": {
     "test": "node test.js"
   },
-  "keywords": [],
-  "author": "",
+  "author": "Victor Petkevich",
   "license": "ISC",
   "dependencies": {
     "as-table": "^1.0.55",

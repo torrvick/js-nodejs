@@ -12,10 +12,11 @@ const colors = {
 };
 
 function readCSV(filename) {
-	let data = fs.readFileSync(filename, 'utf8').toString();
+	let data = null;
 	try {
 		data = fs.readFileSync(filename, 'utf8').toString();
 	} catch (e) {
+		return 'Файл не найден';
 		throw new Error('Файл не найден');
 	}
 	const arr = data.split('\n');
