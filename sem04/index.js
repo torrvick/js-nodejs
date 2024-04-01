@@ -5,8 +5,6 @@ const port = 3000;
 const usersStore = require('./storage/dbStorage');
 const { checkId, checkBody } = require('./validator');
 
-const usersStore = require('./storage/dbStorage');
-
 app.use(express.json());
 
 app.get('/users', (_req, res) => {

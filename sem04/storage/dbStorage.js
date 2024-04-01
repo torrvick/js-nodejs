@@ -21,8 +21,7 @@ const db = new sqlite3.Database(database, (err) => {
 function getAllUsers(res) {
 	db.all('SELECT * FROM users', (err, users) => {
 		if (err) {
-			console.error(err.message);
-			res.status(500).send({ error: 'Ошибка сервера' });
+			handleError(err, res);
 		} else if (users) {
 			res.send({ users });
 		} else {
@@ -34,8 +33,7 @@ function getAllUsers(res) {
 function getUserById(req, res) {
 	db.get('SELECT * FROM users WHERE id = ?', req.params.id, (err, user) => {
 		if (err) {
-			console.error(err.message);
-			res.status(500).send({ error: 'Ошибка сервера' });
+			handleError(err, res);
 		} else if (!user) {
 			res.status(404).send({ user: null });
 		} else {
@@ -48,7 +46,7 @@ function addUser(req, res) {
 	const user = { id: uuidv4(), ...req.body };
 	db.run('INSERT INTO users VALUES (?, ?, ?, ?, ?)', ...Object.values(user), (err) => {
 		if (err) {
-			res.status(500).send({ error: 'Ошибка сервера' });
+			handleError(err, res);
 		} else {
 			res.send({ user });
 		}
@@ -60,7 +58,7 @@ function editUser(req, res) {
 	const { id } = req.params;
 	db.run('UPDATE users SET name=?, lastName=?, age=?, city=? WHERE id=?', [name, lastName, age, city, id], function (err) {
 		if (err) {
-			res.status(500).send({ error: 'Ошибка сервера' });
+			handleError(err, res);
 		} else if (this.changes === 0) {
 			res.send({ user: null });
 		} else {
@@ -73,8 +71,7 @@ function removeUser(req, res) {
 	const { id } = req.params;
 	db.get('SELECT * FROM users WHERE id = ?', id, (err, user) => {
 		if (err) {
-			console.error(err.message);
-			return res.status(500).send({ error: 'Ошибка сервера' });
+			handleError(err, res);
 		} else if (!user) {
 			return res.status(404).send({ user: null });
 		} else {
@@ -87,6 +84,11 @@ function removeUser(req, res) {
 			});
 		}
 	});
+}
+
+function handleError(err, res) {
+	console.log(`Ошибка: ${err.message}`);
+	res.status(500).send({ error: 'Ошибка сервера' });
 }
 
 module.exports = {
