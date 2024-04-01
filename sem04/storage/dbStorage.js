@@ -22,10 +22,10 @@ function getAllUsers(res) {
 	db.all('SELECT * FROM users', (err, users) => {
 		if (err) {
 			handleError(err, res);
-		} else if (users) {
-			res.send({ users });
-		} else {
+		} else if (!users) {
 			res.status(404).send({ users: null });
+		} else {
+			res.send({ users });
 		}
 	});
 }
@@ -56,13 +56,27 @@ function addUser(req, res) {
 function editUser(req, res) {
 	const { name, lastName, age, city } = req.body;
 	const { id } = req.params;
-	db.run('UPDATE users SET name=?, lastName=?, age=?, city=? WHERE id=?', [name, lastName, age, city, id], function (err) {
+	db.get('SELECT * FROM users WHERE id = ?', id, (err, user) => {
 		if (err) {
 			handleError(err, res);
-		} else if (this.changes === 0) {
-			res.send({ user: null });
+		} else if (!user) {
+			return res.status(404).send({ user: null });
 		} else {
-			res.send({ user: { id, name, lastName, age, city } });
+			const query = `
+				UPDATE users SET
+				name=?,
+				lastName=?,
+				age=?,
+				city=?
+				WHERE id=?
+			`;
+			db.run(query, [name, lastName, age, city, id], (err) => {
+				if (err) {
+					handleError(err, res);
+				} else {
+					res.send({ user: { id, name, lastName, age, city } });
+				}
+			});
 		}
 	});
 }
