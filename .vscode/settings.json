@@ -1,0 +1,22 @@
+{
+    "sqltools.connections": [
+        {
+            "previewLimit": 50,
+            "driver": "SQLite",
+            "database": "C:\\Users\\loc_adm\\Downloads\\notes (1).db",
+            "name": "sdf"
+        },
+        {
+            "previewLimit": 50,
+            "driver": "SQLite",
+            "name": "уке",
+            "database": "C:\\Users\\loc_adm\\Downloads\\notes (5).db"
+        },
+        {
+            "previewLimit": 50,
+            "driver": "SQLite",
+            "database": "${workspaceFolder:js-nodejs}/sem04/storage/users.db",
+            "name": "users"
+        }
+    ]
+}
