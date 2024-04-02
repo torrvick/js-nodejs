@@ -1,6 +1,8 @@
 const sqlite3 = require('sqlite3').verbose();
+const path = require('path');
 const { v4: uuidv4 } = require('uuid');
-const database = './storage/users.db';
+
+const database = path.join(__dirname, 'users.db');
 
 const db = new sqlite3.Database(database, (err) => {
 	if (err) {
